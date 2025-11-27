@@ -1,26 +1,24 @@
 #reading Bom
-
-
-table Demand_Product in "OBDC" "./WARP2011W.mdb" (SQL=SELECT Product)Num, ROUND(SUM(Demand) * 2/7) AS Calculated_Demand FROM Product_Demand WHERE Month=2 GROUP BY Product_Num;"):
-[Product_Num], d ~ Calculated_Demand;
+table Demand_Product IN "OBDC" "./WARP2011W.mdb" ("SQL=SELECT Product_Num, ROUND(SUM(Demand) * 2/7) AS Calculated_Demand FROM Product_Demand WHERE Month=2 GROUP BY Product_Num;"):
+[Product_Num], shoe_demand ~ Calculated_Demand;
 read table Demand_Product;
 
-table Machine_Mast in "OBDC" "./WARP2011W.mdb" "Machine_Master";
-M <- [Machine_Num], M_OpCost ~ OpCost_per_min;
+table Machine_Mast IN "OBDC" "./WARP2011W.mdb" "Machine_Master":
+M <- [Machine_Num], machine_op_cost ~ OpCost_per_min;
 read table Machine_Mast_table;
 
 table Product_Master IN "OBDC" "./WARP2011W.mdb" "Product_Master":
-S <- [Product_Num], price ~ Sales_Price; 
+S <- [Product_Num], shoe_price ~ Sales_Price; 
 read table Product_Master_table; 
 
-table BOM_table in "OBDC" "./WARP2011W.mdb" "BOM":
-[Product_Num, RM_Num], AMT_RM_SHOE ~ Quantity; 
+table BOM_table IN "OBDC" "./WARP2011W.mdb" "BOM":
+[Product_Num, RM_Num], shoe_materials ~ Quantity; 
 read table BOM_table;
 
 table RawMats IN "OBDC" "./WARP2011W.mdb" "RM_Master":
-R <- [RM_Num], RMCost ~ Cost, RMQuant ~ S_Quantity; 
+R <- [RM_Num], raw_cost ~ Cost, raw_max ~ S_Quantity; 
 read table RawMats_table;
 
-table MachineAssign_table in "OBDC" " "./WARP2011W.mdb" "Machine_Assign":
-[Product_Num, Machine_Num], Optime ~ Average_Duration;
+table MachineAssign_table IN "OBDC" " "./WARP2011W.mdb" "Machine_Assign":
+[Product_Num, Machine_Num], machine_op_time ~ Average_Duration;
 read table MachineAssign_table;
