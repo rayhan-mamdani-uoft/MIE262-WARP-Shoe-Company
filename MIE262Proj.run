@@ -1,0 +1,72 @@
+reset;
+
+model MIE262Proj.mod;
+data MIE262Proj.dat;
+
+option solver gurobi;
+
+option relax_integrality 1; 
+
+solve;
+
+param roundedprofit;
+let roundedprofit:= profit; 
+
+param roundedx;
+let {s in S} roundedx := round(x[s]);
+
+printf "The maximum profit is: %0.2f.\n", roundedprofit > MIE262Proj.out;
+printf "The optimal x-values (shoes produced) are: \n" > MIE262Proj.out;
+
+display x, x.rc> MIE262Proj7.out;
+
+
+if Budget_C.slack == 0 then
+	printf "Budget is binding.\n" > MIE262Proj.out;
+else 
+	printf "Budget is not binding.\n" > MIE262Proj.out;
+
+for {m in M} {
+	if Op_Time_C[m].slack == 0 then
+		printf "Time Constraint is binding.\n" > MIE262Proj.out;
+	else 
+		printf "Time Constraint is not binding.\n" > MIE262Proj.out;
+
+}
+
+if Warehouse_C.slack == 0 then
+	printf "Warehouse Capacity is binding.\n" > MIE262Proj.out;
+else 
+	printf "Warehouse Capacity is not binding.\n" > MIE262Proj.out;
+
+
+for {r in R} {
+	if Raw_Max_C[r].slack == 0 then
+		printf "Raw Material Quantity Available is binding.\n" > MIE262Proj.out;
+	else if Raw_Max_C[r].slack < 0 then
+		printf "Raw Material Quantity Available is violated.\n" > MIE262Proj.out;
+	else 
+		printf "Raw Material Quantity Available is not binding.\n" > MIE262Proj.out;
+}
+
+for {s in S} {
+	if Shoe_Demand_C[s].slack == 0 then
+		printf "Demand is binding.\n" > MIE262Proj.out;
+	else 
+		printf "Demand is not binding.\n" > MIE262Proj.out;
+}
+
+printf "The shadow prices are: \n" > MIE262Proj.out;
+display Budget_C.dual > MIE262Proj.out;
+display Op_Time_C.dual > MIE262Proj.out;
+display Warehouse_C.dual > MIE262Proj.out;
+display Raw_Max_C.dual > MIE262Proj.out;
+display Shoe_Demand_C.dual > MIE262Proj.out;
+display Budget_C.slack > MIE262Proj.out;
+display Op_Time_C.slack > MIE262Proj.out;
+display Warehouse_C.slack > MIE262Proj.out;
+display Raw_Max_C.slack > MIE262Proj.out;
+display Shoe_Demand_C.slack > MIE262Proj.out;
+
+
+
