@@ -1,3 +1,6 @@
+#Rayhan Mamdani, mamdan15
+#Anupam Chettimada, chettima
+
 reset;
 
 model MIE262Proj.mod;
@@ -67,6 +70,7 @@ display Op_Time_C.slack > MIE262Proj.out;
 display Warehouse_C.slack > MIE262Proj.out;
 display Raw_Max_C.slack > MIE262Proj.out;
 display Shoe_Demand_C.slack > MIE262Proj.out;
+
 
 
 
