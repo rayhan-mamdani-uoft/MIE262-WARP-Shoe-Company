@@ -1,4 +1,5 @@
-
+#Rayhan Mamdani, mamdan15
+#
 #Sets from dat
 set S; #shoes
 set M; #machines
@@ -32,4 +33,5 @@ subject to Op_Time_C{m in M}: sum{s in S} x[s]*(machine_op_time[s, m]/60) <= MAC
 subject to Raw_Max_C{r in R}: sum{s in S} x[s]*shoe_materials[s, r] <= raw_max[r]; #each material cannot exceed the respective max quantity
 subject to Warehouse_C: sum{s in S} x[s] <= WAREHOUSE_CAP; #total number of shoes does not exceed the warehouse capacity
 subject to Shoe_Demand_C{s in S}: x[s] <= shoe_demand[s]; #production of a shoe should not exceed the demand of the shoe
+
 subject to Budget_C: (sum{s in S, r in R} raw_cost[r]*x[s]*shoe_materials[s, r]) <= BUDGET;
