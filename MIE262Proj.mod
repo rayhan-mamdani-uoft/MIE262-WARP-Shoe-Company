@@ -1,5 +1,5 @@
 #Rayhan Mamdani, mamdan15
-#
+#Anupam Chettimada, chettima
 #Sets from dat
 set S; #shoes
 set M; #machines
@@ -35,3 +35,4 @@ subject to Warehouse_C: sum{s in S} x[s] <= WAREHOUSE_CAP; #total number of shoe
 subject to Shoe_Demand_C{s in S}: x[s] <= shoe_demand[s]; #production of a shoe should not exceed the demand of the shoe
 
 subject to Budget_C: (sum{s in S, r in R} raw_cost[r]*x[s]*shoe_materials[s, r]) <= BUDGET;
+
