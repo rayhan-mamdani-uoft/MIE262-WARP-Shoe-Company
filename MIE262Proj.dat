@@ -1,3 +1,6 @@
+#Rayhan Mamdani, mamdan15
+#Anupam Chettimada, chettima
+
 table ProductDem_table IN "ODBC" "./WARP2011W.mdb"  "SQL=SELECT Product_Num, round(SUM(Demand)*2/7) AS Calculated_Demand FROM Product_Demand WHERE Month=2 GROUP BY Product_Num":
 [Product_Num], shoe_demand ~ Calculated_Demand;
 read table ProductDem_table;
@@ -21,3 +24,4 @@ read table RawMats_table;
 table MachineAssign_table IN "ODBC" "./WARP2011W.mdb" "Machine_Assign":
 [Product_Num, Machine_Num], machine_op_time ~ Avg_Duration;
 read table MachineAssign_table;
+
