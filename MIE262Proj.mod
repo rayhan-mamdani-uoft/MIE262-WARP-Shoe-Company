@@ -1,5 +1,6 @@
-#Rayhan Mamdani, mamdan15
-#Anupam Chettimada, chettima
+#Rayhan_Mamdani_mamdan15_1011130946
+#Anupam_Chettimada_chettima_101113421
+
 #Sets from dat
 set S; #shoes
 set M; #machines

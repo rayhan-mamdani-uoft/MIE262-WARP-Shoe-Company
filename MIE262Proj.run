@@ -1,5 +1,5 @@
-#Rayhan Mamdani, mamdan15
-#Anupam Chettimada, chettima
+#Rayhan_Mamdani_mamdan15_1011130946
+#Anupam_Chettimada_chettima_101113421
 
 reset;
 
@@ -15,13 +15,13 @@ solve;
 param roundedprofit;
 let roundedprofit:= profit; 
 
-param roundedx;
-let {s in S} roundedx := round(x[s]);
+param roundedx{S};
+let {s in S} roundedx[s] := round(x[s]);
 
 printf "The maximum profit is: %0.2f.\n", roundedprofit > MIE262Proj.out;
 printf "The optimal x-values (shoes produced) are: \n" > MIE262Proj.out;
 
-display x, x.rc> MIE262Proj7.out;
+display roundedx> MIE262Proj.out;
 
 
 if Budget_C.slack == 0 then
